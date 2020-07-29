@@ -15,7 +15,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
     spelling,
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Language: en-US
 URL: https://github.com/BWAM/NBI
 BugReports: https://github.com/BWAM/NBI/issues
+VignetteBuilder: knitr
