@@ -1,0 +1,47 @@
+---
+title: "Nutrient Biotic Index - Phase 2"
+author: "Alexander J. Smith, PhD"
+date: "September 11, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Overview**
+
+This Markdown file provides the documentation for updating the Nutrient Biotic Index (NBI) (See Smith et al. 2007) to include:  
+
+  1. Nutrient optima for benthic macroinvertebrate taxa not included in the original publication of the index.  
+  2. Assignment of tolerance values to this same set of new taxa.  
+  3. An automated method for updating the index in the future to include new taxa or to calibrate regionally.  
+
+The methods used rely on the use of existing nutrient bins, weighted average equation, and tolerance value assignment ranges as published in Smith et al. 2007.  
+
+**References:**  
+Smith, A.J., R.W. Bode, and G.S. Kleppel. 2007. *A nutrient biotic index (NBI) for use with benthic macroinvertebrate communities*. Ecological Indicators 7:371-386
+
+
+# **Data Sources**
+
+Import in the raw data files from the working directory. These include a species data table, water chemistry data table, and a site data table. 
+```{r Importing Data Sources}
+
+species<-read.csv("Species_2002_2016.csv")
+chemistry<-read.csv("Chemistry_2002_2016.csv")
+chembiojoin<-read.csv("RIBSchem_BioSiteJoin_Final_2019-01-09.csv")
+
+```
+
+Create two new tables for species and chemistry data that add the column "RIBS_ID" to the species table and "BASIN_LOC_RIV" to the chemistry table. By providing this set of joins and adding the additional columns from matching records in each table, we have the necessary data to compare nutrient values to macroinvertebrate species.
+```{r Performing Joins on Data Sources}
+
+joinedspecies<-merge(x=species,y=chembiojoin, by="BASIN_LOC_RIV", all=FALSE)
+joinedchemistry<-merge(x=chemistry,y=chembiojoin, by="RIBS_ID", all=FALSE)
+
+summary(joinedspecies)
+summary(joinedchemistry)
+
+```
+
