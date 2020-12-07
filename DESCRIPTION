@@ -22,3 +22,5 @@ Language: en-US
 URL: https://github.com/BWAM/NBI
 BugReports: https://github.com/BWAM/NBI/issues
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
